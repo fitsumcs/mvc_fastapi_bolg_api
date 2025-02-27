@@ -1,0 +1,49 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# macOS system files
+.DS_Store
+
+# Logs and databases
+*.log
+*.sqlite3
+test.db  # Ignore SQLite database file
+
+# Python cache
+*.pyc
+*.pyo
+*.pyd
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.test
+
+# PyCharm
+.idea/
+
+# VSCode
+.vscode/
+
+# Dependencies
+*.egg-info/
+dist/
+build/
+
+# Uvicorn logs
+*.pid
+
+# Migrations (if using Alembic)
+migrations/
+alembic/
+
+# Docker
+docker-compose.override.yml
