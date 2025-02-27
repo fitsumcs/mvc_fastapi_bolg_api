@@ -12,3 +12,4 @@ pydantic
 email-validator
 python-jose[cryptography]
 bcrypt
+cachetools
