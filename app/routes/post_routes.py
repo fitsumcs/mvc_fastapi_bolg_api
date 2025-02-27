@@ -21,5 +21,5 @@ def list_posts(token: str, db: Session = Depends(get_db)):
 @router.delete("/{post_id}")
 def remove_post(post_id: int, token: str, db: Session = Depends(get_db)):
     user = verify_token(token, db)
-    return delete_post(db, post_id, user)  # ✅ user.id is now used inside delete_post()
+    return delete_post(db, post_id, user) 
 
