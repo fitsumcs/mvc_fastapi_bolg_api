@@ -7,6 +7,15 @@ from app.services.auth_service import create_access_token, hash_password, verify
 
 router = APIRouter()
 
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from app.database import get_db
+from app.models.user import User
+from app.schemas.user_schema import UserCreate, UserResponse
+from app.services.auth_service import hash_password
+
+router = APIRouter()
+
 @router.post("/signup", response_model=UserResponse)
 def signup(user_data: UserCreate, db: Session = Depends(get_db)):
     # Check if user already exists
@@ -14,12 +23,14 @@ def signup(user_data: UserCreate, db: Session = Depends(get_db)):
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
 
-    # Create user
+    # Create new user
     new_user = User(email=user_data.email, hashed_password=hash_password(user_data.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return new_user
+
+    # Return user response in a valid dictionary format
+    return UserResponse(id=new_user.id, email=new_user.email)
 
 @router.post("/login")
 def login(user_data: UserCreate, db: Session = Depends(get_db)):

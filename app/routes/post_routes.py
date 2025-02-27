@@ -7,18 +7,19 @@ from app.services.auth_service import verify_token
 
 router = APIRouter()
 
-@router.post("/", response_model=PostResponse)
+@router.post("/")
 def add_post(post_data: PostCreate, token: str, db: Session = Depends(get_db)):
-    user_id = verify_token(token, db)
-    return create_post(db, post_data.text, user_id)
+    user = verify_token(token, db)
+    return create_post(db, post_data.text, user) 
 
-@router.get("/", response_model=list[PostResponse])
+@router.get("/")
 def list_posts(token: str, db: Session = Depends(get_db)):
-    user_id = verify_token(token, db)
-    return get_posts(db, user_id)
+    user = verify_token(token, db)
+    return get_posts(db, user)  
+
 
 @router.delete("/{post_id}")
 def remove_post(post_id: int, token: str, db: Session = Depends(get_db)):
-    user_id = verify_token(token, db)
-    delete_post(db, post_id)
-    return {"message": "Post deleted"}
+    user = verify_token(token, db)
+    return delete_post(db, post_id, user)  # ✅ user.id is now used inside delete_post()
+
