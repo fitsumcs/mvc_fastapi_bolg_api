@@ -33,17 +33,23 @@ ACCESS_TOKEN_EXPIRE_MINUTES=30
 
 uvicorn main:app --reload
 
-By default, the app will run at:
-🔗 Swagger UI: http://127.0.0.1:8000/docs
-🔗 Redoc UI: http://127.0.0.1:8000/redoc
+## By default, the app will run at:
 
-🛠️ API Endpoints
-Authentication
-Method Endpoint Description
-POST /auth/signup Register a new user
-POST /auth/login Authenticate user & get token
-Posts
-Method Endpoint Description
-POST /posts/ Create a new post (requires authentication)
-GET /posts/ Retrieve all posts (requires authentication)
-DELETE /posts/{post_id} Delete a post (requires authentication)
+🔗 Swagger UI: http://127.0.0.1:8000/docs
+
+## 🛠️ API Endpoints
+
+### 🔐 Authentication
+
+| Method   | Endpoint       | Description                   |
+| -------- | -------------- | ----------------------------- |
+| **POST** | `/auth/signup` | Register a new user           |
+| **POST** | `/auth/login`  | Authenticate user & get token |
+
+### 📝 Posts
+
+| Method     | Endpoint           | Description                                  |
+| ---------- | ------------------ | -------------------------------------------- |
+| **POST**   | `/posts/`          | Create a new post (requires authentication)  |
+| **GET**    | `/posts/`          | Retrieve all posts (requires authentication) |
+| **DELETE** | `/posts/{post_id}` | Delete a post (requires authentication)      |
